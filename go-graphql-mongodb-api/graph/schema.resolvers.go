@@ -9,6 +9,8 @@ import (
 	"fmt"
 	"go-graphql-mongodb-api/db"
 	"go-graphql-mongodb-api/graph/model"
+
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 // CreateTodo is the resolver for the createTodo field.
@@ -26,6 +28,32 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 	}
 
 	return createdTodo, nil
+}
+
+// Create News
+func (r *mutationResolver) CreateNews(ctx context.Context, input model.NewNews) (*model.News, error) {
+	// Call the CreateNews function from the db package to insert a new News
+	result, err := db.CreateNews(input)
+	if err != nil {
+		return nil, err
+	}
+
+	// Retrieve the generated ID from the result of the CreateNews operation.
+	newsID := result.InsertedID.(primitive.ObjectID).Hex()
+	// fmt.Printf("Inserted news with ID: %s\n", newsID)
+
+	// Use the retrieved ID to fetch the newly created news item.
+	createdNews, err := db.FetchNewsByID(newsID)
+	if err != nil {
+		return nil, err
+	}
+
+	// Assign the retrieved ID to the ID field of the createdNews.
+	createdNews.ID = newsID
+
+	// fmt.Printf("Created news: %+v\n", createdNews)
+
+	return createdNews, nil
 }
 
 // Todos is the resolver for the todos field.

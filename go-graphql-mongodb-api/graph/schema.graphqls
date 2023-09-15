@@ -25,6 +25,32 @@ input NewTodo {
   userId: String!
 }
 
+input NewNews {
+  title: String!
+  content: String!
+  author: String!
+  category: String!
+  imageURL: String!
+  likes: Int!
+  comments: String!
+  share: String!
+  publicationDate: String!
+}
+
 type Mutation {
   createTodo(input: NewTodo!): Todo!
+  createNews(input: NewNews!): News!
+}
+
+type News {
+  id: ID!
+  title: String!
+  content: String!
+  author: String!
+  category: String!
+  imageURL: String!
+  likes: Int!
+  comments: String!
+  share: String!
+  publicationDate: String!
 }

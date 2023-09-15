@@ -2,9 +2,34 @@
 
 package model
 
+type NewNews struct {
+	Title           string `json:"title"`
+	Content         string `json:"content"`
+	Author          string `json:"author"`
+	Category        string `json:"category"`
+	ImageURL        string `json:"imageURL"`
+	Likes           int    `json:"likes"`
+	Comments        string `json:"comments"`
+	Share           string `json:"share"`
+	PublicationDate string `json:"publicationDate"`
+}
+
 type NewTodo struct {
 	Text   string `json:"text"`
 	UserID string `json:"userId"`
+}
+
+type News struct {
+	ID              string `json:"id"`
+	Title           string `json:"title"`
+	Content         string `json:"content"`
+	Author          string `json:"author"`
+	Category        string `json:"category"`
+	ImageURL        string `json:"imageURL"`
+	Likes           int    `json:"likes"`
+	Comments        string `json:"comments"`
+	Share           string `json:"share"`
+	PublicationDate string `json:"publicationDate"`
 }
 
 type Todo struct {
